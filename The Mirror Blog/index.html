@@ -1,11 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<html>
     
-</body>
+    <head>
+        <title>The Mirror Blog</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400;1,500;1,700;1,800;1,900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="index.css">
+    </head>
+
+    <body>
+        <section id="logged-out-view">
+            <div class="container">
+                <div class="banner">
+                    <img class="banner-img" src="Assets/banner.jpg">
+                </div>
+                
+                <div class="auth-fields-and-buttons">
+                    <input id="email-input" type="email" placeholder="Email">
+                    <input id="password-input" type="password" placeholder="Password">
+                    
+                    <button id="sign-in-btn" class="primary-btn">Sign in</button>
+                    <button id="sign-up-btn" class="secondary-btn">Sign Up</button>
+                </div>
+            </div>
+        </section>
+        
+        <section id="logged-in-view">
+            <div class="container">
+                <!-- log out button-->
+                <nav>
+                    <button id="sign-out-btn" class="icon-btn">
+                        <img src="" class="icon-img-btn">
+                    </button>
+                </nav>
+
+                <div class="app-container">
+                    <div class="user-section">
+                        <img id="user-profile-picture">
+                        <h2 id="user-greeting"></h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="index.js" type="module"></script>
+    </body>
 </html>
