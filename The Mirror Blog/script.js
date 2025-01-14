@@ -33,6 +33,25 @@ const analytics = getAnalytics(app);
 
 
 /* === Functions === */
+
+function authSignInWithEmail() {
+    console.log("Sign in with email and password")
+    const auth = getAuth();
+    const email = emailInputEl.value; 
+    const password = passwordInputEl.value;
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        showLoggedInView();
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+}
+
+/* Create account with email */
 function authCreateAccountWithEmail() {
     console.log("Sign up with email and password")
     const email = emailInputEl.value;
