@@ -35,13 +35,6 @@ const analytics = getAnalytics(app);
 /* === Functions === */
 function authCreateAccountWithEmail() {
     console.log("Sign up with email and password")
-        /*  Challenge:
-       1 Import the createUserWithEmailAndPassword function from from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-       2 Use the code from the documentation to make this function work.
-       3 Make sure to first create two consts, 'email' and 'password', to fetch the values from the input fields emailInputEl and passwordInputEl.
-       4 If the creation of user is successful then you should show the logged in view using showLoggedInView()
-       5 If something went wrong, then you should log the error message using console.error.
-    */
     const email = emailInputEl.value;
     const password = passwordInputEl.value;
     const auth = getAuth();
