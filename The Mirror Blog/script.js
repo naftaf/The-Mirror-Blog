@@ -6,8 +6,7 @@ import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/1
 import { signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"; 
-// import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"; 
+import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"; 
 
 
 /* === FIREBASE SETUP === */
@@ -40,6 +39,7 @@ const userProfilePictureEl = document.getElementById("user-profile-picture")
 const userGreetingEl = document.getElementById("user-greeting")
 const textareaEl = document.getElementById("post-input")
 const postButtonEl = document.getElementById("post-btn")
+const teaPartyEl = document.getElementById("tea-party-posts")
 
 /* == UI - Event Listeners == */
 signInButtonEl.addEventListener("click", authSignInWithEmail)
@@ -60,7 +60,7 @@ function authFunction() {
         const uid = user.uid;
         showProfilePicture(userProfilePictureEl, user);
         showUserGreeting(userGreetingEl, user);
-        // ...
+                // ...
       } else {
         // User is signed out
         // ...
@@ -163,6 +163,7 @@ function authSignOut() {
         console.log(errorMessage);
     });
 }
+
 async function addPostToDB(postBody, user) {
   try {
     const docRef = await addDoc(collection(db, "posts"), {
@@ -175,12 +176,19 @@ async function addPostToDB(postBody, user) {
   }
 }
 
-// async function getPostFromDB(postBody, user) {
-//   const querySnapshot = await getDocs(collection(db, "posts"));
-//   querySnapshot.forEach((doc) => {
-//     console.log(`${doc.id} => ${doc.data()}`);
-//   });
-// }
+async function getPostFromDB(postBody, user) {
+  const querySnapshot = await getDocs(collection(db, "posts"));
+  querySnapshot.forEach((doc) => {
+    console.log(`${doc.id} => ${doc.data()}`);
+    let post = document.createElement("div")
+    let user = document.createElement("h2")
+    user.append(doc.id)
+    let body = document.createAttribute("p")
+    body.append(postBody)
+    post.append(user, body)
+    teaPartyEl.appendChild(post.childNodes)
+  });
+}
 
 
 
