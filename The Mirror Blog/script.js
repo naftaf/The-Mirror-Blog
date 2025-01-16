@@ -5,6 +5,10 @@ import {createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 import { signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"; 
+// import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"; 
+
 
 /* === FIREBASE SETUP === */
 const firebaseConfig = {
@@ -18,6 +22,7 @@ appId: "1:876746537077:web:125ffe67b7a761d7be603c",
 measurementId: "G-6PB4583T6T"
 };
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 // const analytics = getAnalytics(app);
 
 /* === UI === */
@@ -33,12 +38,14 @@ const createAccountButtonEl = document.getElementById("sign-up-btn")
 const signOutButtonEl = document.getElementById("sign-out-btn")
 const userProfilePictureEl = document.getElementById("user-profile-picture")
 const userGreetingEl = document.getElementById("user-greeting")
+const textareaEl = document.getElementById("post-input")
+const postButtonEl = document.getElementById("post-btn")
 
 /* == UI - Event Listeners == */
 signInButtonEl.addEventListener("click", authSignInWithEmail)
 createAccountButtonEl.addEventListener("click", authCreateAccountWithEmail)
 signOutButtonEl.addEventListener("click", authSignOut)
-
+postButtonEl.addEventListener("click", postButtonPressed)
 
 /* === Main Code === */
 authFunction();
@@ -76,6 +83,7 @@ async function showProfilePicture(imgElement, user) {
         // this value to authenticate with your backend server, if
         // you have one. Use User.getToken() instead.
         const uid = user.uid;
+        console.log(user.uid)
     }
  }
 
@@ -155,6 +163,26 @@ function authSignOut() {
         console.log(errorMessage);
     });
 }
+async function addPostToDB(postBody, user) {
+  try {
+    const docRef = await addDoc(collection(db, "posts"), {
+      body: postBody,
+      uid: user.uid
+    });
+    console.log("Document written with ID: {documentID}");
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
+
+// async function getPostFromDB(postBody, user) {
+//   const querySnapshot = await getDocs(collection(db, "posts"));
+//   querySnapshot.forEach((doc) => {
+//     console.log(`${doc.id} => ${doc.data()}`);
+//   });
+// }
+
+
 
 /* == Functions - UI Functions == */
 function showLoggedOutView() {
@@ -176,4 +204,15 @@ view.style.display = "flex"
 
 function hideView(view) {
 view.style.display = "none"
+}
+
+function postButtonPressed() {
+  const postBody = textareaEl.value
+  const auth = getAuth();
+  const user = auth.currentUser
+ 
+  if (postBody) {
+      addPostToDB(postBody, user)
+      clearInputField(textareaEl)
+  }
 }
