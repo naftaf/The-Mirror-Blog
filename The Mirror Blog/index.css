@@ -96,6 +96,31 @@ input:focus {
     outline: none;
 }
 
+textarea {
+    font-size: 1em;
+    border: 0;
+    box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, .25);
+    resize: none;
+    height: 6em;
+ }
+ 
+ 
+ textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: var(--grey-color);
+    opacity: 1; /* Firefox */
+ }
+ 
+ 
+ textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: var(--grey-color);
+ }
+ 
+ 
+ textarea::-ms-input-placeholder { /* Microsoft Edge */
+    color: var(--grey-color);
+ }
+ 
+
 /* === Buttons === */
 button {
     font-family: var(--primary-font);
@@ -126,6 +151,7 @@ button.secondary-btn {
 button.secondary-btn:hover {
     background-color: var(--tertiary-color);
 }
+
 
 /* === User Section === */
 .user-section {
@@ -205,3 +231,68 @@ nav {
 #logged-in-view {
     display: none;
 }
+
+/* === Logged In Page == */
+.tea-party {
+    background-color: #d3f2ef;
+    border-radius: 10px;
+    margin: 30px auto;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    text-align: left;
+}
+
+.tea-news {
+    text-align: center;
+}
+
+.tea-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.tea-text h2 {
+    background-color: #842663;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.tea-text p {
+    color: #4d9895;
+    font-size: 18px;
+}
+
+.tea-comments {
+    background-color: #f4ca74;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.tea-comments h3 {
+    color: #842663;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.tea-comment-list {
+    list-style: none;
+    padding: 0;
+    color: #4d9895;
+    font-size: 14px;
+}
+
+.tea-comment-list li {
+    margin-bottom: 8px;
+}
+
+/* === Post Section === */
+
+.post-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+ }
