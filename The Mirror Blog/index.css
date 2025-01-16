@@ -102,6 +102,9 @@ textarea {
     box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, .25);
     resize: none;
     height: 6em;
+    margin: 30px auto;
+    padding: 20px;
+    width: 85%;
  }
  
  
@@ -136,6 +139,7 @@ button.primary-btn {
     background-color: var(--primary-color);
     color: var(--light-color);
     border: none;
+    width: 100%;
 }
 
 button.primary-btn:hover {
@@ -254,11 +258,12 @@ nav {
     margin-bottom: 15px;
 }
 
-.tea-text h2 {
-    background-color: #842663;
-    font-size: 25px;
-    margin-bottom: 10px;
+#tea-party-header {
+    color:#842663;
+    width: 300px;
+    text-decoration: underline;
 }
+
 
 .tea-text p {
     color: #4d9895;
@@ -292,7 +297,13 @@ nav {
 /* === Post Section === */
 
 .post-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
- }
+    background-color: #d3f2ef;
+    border-radius: 10px;
+    margin: 30px auto;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    text-align: left;
+}
+
+
