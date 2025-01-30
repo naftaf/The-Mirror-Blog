@@ -183,7 +183,7 @@ async function getPostFromDB() {
   teaPartyEl.innerHTML = "";
   const querySnapshot = await getDocs(collection(db, "posts"));
   querySnapshot.forEach((doc) => {
-    console.log(`${doc.id} => ${doc.data()}`);
+    console.log(doc.data());
     let postBox = document.createElement("div")
     let userName = document.createElement("h3")
     let body = document.createElement("p")
