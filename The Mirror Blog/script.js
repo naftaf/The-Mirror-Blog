@@ -40,12 +40,15 @@ const userGreetingEl = document.getElementById("user-greeting")
 const textareaEl = document.getElementById("post-input")
 const postButtonEl = document.getElementById("post-btn")
 const teaPartyEl = document.getElementById("tea-party-posts")
+const refreshButton = document.getElementById("refresh-btn")
 
 /* == UI - Event Listeners == */
 signInButtonEl.addEventListener("click", authSignInWithEmail)
 createAccountButtonEl.addEventListener("click", authCreateAccountWithEmail)
 signOutButtonEl.addEventListener("click", authSignOut)
 postButtonEl.addEventListener("click", postButtonPressed)
+refreshButton.addEventListener("click", getPostFromDB)
+
 
 /* === Main Code === */
 authFunction();
@@ -176,21 +179,19 @@ async function addPostToDB(postBody, user) {
   }
 }
 
-async function getPostFromDB(postBody, user) {
+async function getPostFromDB() {
+  teaPartyEl.innerHTML = "";
   const querySnapshot = await getDocs(collection(db, "posts"));
   querySnapshot.forEach((doc) => {
     console.log(`${doc.id} => ${doc.data()}`);
-    let post = document.createElement("div")
-    let user = document.createElement("h2")
-    user.append(doc.id)
-    let body = document.createAttribute("p")
-    body.append(postBody)
-    post.append(user, body)
-    teaPartyEl.appendChild(post.childNodes)
+    let postBox = document.createElement("div")
+    let userName = document.createElement("h3")
+    let body = document.createElement("p")
+    body.textContent = doc.data().body;
+    postBox.append(body);
+    teaPartyEl.appendChild(postBox)
   });
 }
-
-
 
 /* == Functions - UI Functions == */
 function showLoggedOutView() {
